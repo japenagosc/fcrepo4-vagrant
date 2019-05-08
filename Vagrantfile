@@ -17,7 +17,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.network :forwarded_port, guest: 8983, host: 8983 #Solr
 
   config.vm.provider "virtualbox" do |v|
-  	v.memory = 2048
+  	v.memory = 4096
+	v.cpus = 2
   end
 
   shared_dir = "/vagrant"

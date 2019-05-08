@@ -57,4 +57,6 @@ if ! grep -q "fcrepo.spring.configuration" /etc/default/tomcat7 ; then
   echo "CATALINA_OPTS=\"\${CATALINA_OPTS} -Dfcrepo.spring.configuration=file://${HOME_DIR}/fcrepo-config.xml\"" >> /etc/default/tomcat7;
 fi
 
+echo "JAVA_OPTS=\"-Djava.awt.headless=true -Xmx2048m -XX:+UseConcMarkSweepGC\"" >> /etc/default/tomcat7;
+
 service tomcat7 restart

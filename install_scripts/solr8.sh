@@ -21,7 +21,7 @@ if  ! -d /home/vagrant/solr-8.0.0 ; then
 	sleep 3
 	
 	#su solr -c "solr start"
-	su solr -c "/opt/solr/bin/solr create -c va-meta"
+	#su solr -c "/opt/solr/bin/solr create -c va-meta"
 	su solr -c "/opt/solr/bin/solr create -c va-daten"
 	sleep 3
 	
