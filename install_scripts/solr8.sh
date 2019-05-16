@@ -22,7 +22,11 @@ if  ! -d /home/vagrant/solr-8.0.0 ; then
 	
 	#su solr -c "solr start"
 	#su solr -c "/opt/solr/bin/solr create -c va-meta"
-	su solr -c "/opt/solr/bin/solr create -c va-daten"
+	su solr -c "/opt/solr/bin/solr create -c VA-IngestTest01"
+	su solr -c "/opt/solr/bin/solr create -c VA-IngestTest02"
+	su solr -c "/opt/solr/bin/solr create -c VA-IngestTest03"
+	su solr -c "/opt/solr/bin/solr create -c VA-IngestTest04"
+	su solr -c "/opt/solr/bin/solr create -c VA-IngestTest05"
 	sleep 3
 	
 	wget -O /usr/local/bin/fcr-listen https://github.com/birkland/fcr-listen/releases/download/0.0.1/fcr-listen-`uname -s`-`uname -m`
