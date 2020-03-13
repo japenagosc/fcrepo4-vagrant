@@ -35,6 +35,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "file", source: "./install_scripts/template/solrconfig.xml", destination: "/home/vagrant/template/solrconfig.xml"
   config.vm.provision "file", source: "./install_scripts/template/common-nouns.txt", destination: "/home/vagrant/template/common-nouns.txt"
   config.vm.provision "file", source: "./install_scripts/template/stopwords.txt", destination: "/home/vagrant/template/stopwords.txt"
+  config.vm.provision "file", source: "./install_scripts/template/reset.sh", destination: "/home/vagrant/template/reset.sh"
   
   config.vm.provision "file", source: "./install_scripts/template/TestFiles.xml", destination: "/home/vagrant/template/TestFiles.xml"
   

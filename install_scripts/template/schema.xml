@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema name="schemafdm" version="1.6">
+
+	<!-- Fields -->
+	<field name="fedoraURI" type="fdmFedoraURI" required="true" stored="true"/>	
+	<field name="DOI" type="fdmDOI" required="true" indexed="true" stored="true"/>
+
+	<!-- DDC -->
+	<field name="DDC" type="fdmDDCStr" indexed="true" stored="true" required="true" multiValued="true"/>
+	
+	<copyField source="DDC" dest="DDCNumber" maxChars="20"/>
+	<field name="DDCNumber" type="fdmDDC" indexed="true" stored="false" multiValued="true" />
+	
+	<copyField source="DDC" dest="DDCText" maxChars="50000"/>
+	<field name="DDCText" type="fdmDDCText" indexed="true" stored="false" multiValued="true" />
+
+	<!-- Person, Creator, ProjectMember, ProjectManager, ProjectCurator -->
+	<dynamicField name="*_pname" type="fdmPerson" indexed="true" stored="false" multiValued="true"/>
+	<copyField source="*_pname" dest="PersonName" maxChars="100"/>
+	<field name="PersonName" type="fdmPersonNameStr" indexed="true" stored="true" required="true" multiValued="true"/>
+	
+	<dynamicField name="*_paffiliation" type="fdmPersonAffiliation" indexed="true" stored="false" multiValued="true"/>
+	<copyField source="*_paffiliation" dest="PersonAffiliation" maxChars="1000"/>
+	<field name="PersonAffiliation" type="fdmPersonAffiliationStr" indexed="true" stored="true" required="true" multiValued="true"/>
+	
+	<dynamicField name="*_pid" type="fdmPersonId" indexed="true" stored="false" multiValued="true"/>
+	<copyField source="*_pid" dest="PersonId" maxChars="1000"/>
+	<field name="PersonId" type="fdmPersonIdStr" indexed="true" stored="true" required="true" multiValued="true"/>
+
+	<field name="Keyword" type="fdmKeyword" indexed="true" stored="true" multiValued="true" />
+
+	<field name="Location" type="fdmLocation" indexed="true" stored="true" multiValued="true" />
+	<field name="LocationPolygon" type="fdmLocationPolygon" indexed="true" stored="true" multiValued="true" />
+
+	<uniqueKey>DOI</uniqueKey>
+
+
+
+	<!-- String Fields for the Facets -->
+	<!-- DOI -->
+	<fieldType name="fdmDOI" class="solr.StrField"/>
+
+	<!-- Fedora URI -->
+	<fieldType name="fdmFedoraURI" class="solr.StrField" />
+	
+	<!-- PersonName -->
+	<fieldType name="fdmPersonNameStr" class="solr.StrField" />
+	<fieldType name="fdmPersonAffiliationStr" class="solr.StrField" />
+	<fieldType name="fdmPersonIdStr" class="solr.StrField" />
+	
+	<!-- DDC -->
+	<fieldType name="fdmDDCStr" class="solr.StrField"/>
+
+	<!-- Creator, ProjectMember, usw.  -->
+	<fieldType name="fdmPerson" class="solr.TextField">
+		<analyzer>
+		<!--
+		<tokenizer class="solr.ClassicTokenizerFactory"/>
+		-->
+			<tokenizer class="solr.KeywordTokenizerFactory"/>
+			<filter class="solr.LowerCaseFilterFactory"/>
+			<filter class="solr.GermanNormalizationFilterFactory"/>
+		</analyzer>
+	</fieldType>
+
+	<!-- Affiliation -->
+	<fieldType name="fdmPersonAffiliation" class="solr.TextField">
+		<analyzer type="index">
+			<tokenizer class="solr.PatternTokenizerFactory" pattern=","/>
+			
+			<!--
+			<tokenizer class="solr.WhitespaceTokenizerFactory"/>
+			-->
+
+			<filter class="solr.HyphenatedWordsFilterFactory"/>
+			<filter class="solr.ClassicFilterFactory"/>
+			<filter class="solr.TrimFilterFactory"/>
+			<filter class="solr.LowerCaseFilterFactory"/>
+			<filter class="solr.GermanNormalizationFilterFactory"/>
+			
+			
+			<!--
+			<filter class="solr.WordDelimiterGraphFilterFactory"/>
+			<filter class="solr.FlattenGraphFilterFactory"/> 
+			<filter class="solr.EdgeNGramFilterFactory" minGramSize="3" maxGramSize="30"/>
+			-->			
+		</analyzer>
+
+		<analyzer type="query">
+			<tokenizer class="solr.ClassicTokenizerFactory"/>
+
+			<filter class="solr.LowerCaseFilterFactory"/>
+			<filter class="solr.GermanNormalizationFilterFactory"/>
+			<!-- Synonymen? 
+			<filter class="solr.EdgeNGramFilterFactory" minGramSize="3" maxGramSize="20"/>
+			-->
+		</analyzer>
+	</fieldType>
+
+	<!-- ID (orcid / dnb) -->
+	<fieldType name="fdmPersonId" class="solr.TextField">
+		<analyzer>
+			<tokenizer class="solr.UAX29URLEmailTokenizerFactory"/>
+		</analyzer>
+	</fieldType>
+
+	<!-- Keywords -->
+	<fieldType name="fdmKeyword" class="solr.TextField">
+		<analyzer type="index">
+			<tokenizer class="solr.StandardTokenizerFactory"/>
+
+			<filter class="solr.LowerCaseFilterFactory"/>
+			<filter class="solr.StopFilterFactory" words="stopwords.txt" format="snowball"/>
+			<filter class="solr.DictionaryCompoundWordTokenFilterFactory" dictionary="common-nouns.txt" minWordSize="5" minSubwordSize="4" maxSubwordSize="15" onlyLongestMatch="true"/>
+			<!--
+			<filter class="solr.GermanStemFilterFactory"/>
+			-->
+			<filter class="solr.GermanNormalizationFilterFactory"/>
+			<!--
+			<filter class="solr.EdgeNGramFilterFactory" minGramSize="3" maxGramSize="20"/>
+			-->
+		</analyzer>
+
+		<analyzer type="query">
+			<tokenizer class="solr.StandardTokenizerFactory"/>
+
+			<filter class="solr.LowerCaseFilterFactory"/>
+			<filter class="solr.GermanNormalizationFilterFactory"/>
+			<filter class="solr.StopFilterFactory" words="stopwords.txt" format="snowball"/>
+
+		</analyzer>
+	</fieldType>
+
+	<!-- Location -->
+	<fieldType name="fdmLocation" class="solr.TextField">
+		<analyzer>
+			<tokenizer class="solr.KeywordTokenizerFactory"/>
+			<!--
+			<tokenizer class="solr.ClassicTokenizerFactory"/>
+			-->
+			<filter class="solr.LowerCaseFilterFactory"/>
+			<filter class="solr.GermanNormalizationFilterFactory"/>
+			<!--
+			<filter class="solr.EdgeNGramFilterFactory" minGramSize="3" maxGramSize="20"/>
+			-->
+		</analyzer>
+	</fieldType>
+
+	<!-- Location Polygon-->
+	<fieldType name="fdmLocationPolygon" class="solr.LatLonPointSpatialField" docValues="true">
+	</fieldType>
+
+	<!-- 
+		DDC 
+		Beispiele: 410 Linguistics / 004 Data processing computer science
+	-->
+	<fieldType name="fdmDDC" class="solr.TextField">
+		<analyzer>
+			<tokenizer class="solr.PatternTokenizerFactory" pattern="[0-9]*" group="0"/>
+		</analyzer>
+	</fieldType>
+
+	<fieldType name="fdmDDCText" class="solr.TextField">
+		<analyzer>
+			<tokenizer class="solr.PatternTokenizerFactory" pattern="[a-zA-Z]*" group="0"/>
+
+			<filter class="solr.LowerCaseFilterFactory"/>
+			<filter class="solr.EnglishMinimalStemFilterFactory"/>
+			<!--
+			<filter class="solr.EdgeNGramFilterFactory" minGramSize="3" maxGramSize="20"/>
+			-->
+		</analyzer>
+	</fieldType>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- CopyFields -->
+	<copyField source="Keyword" dest="search" maxChars="1000"/>
+	<copyField source="Location" dest="search" maxChars="1000"/>
+	<copyField source="DDC" dest="search" maxChars="1000"/>
+	
+	<field name="search" type="fdmSearch" indexed="true" stored="false" multiValued="true"/>
+	<fieldType name="fdmSearch" class="solr.TextField">
+		<analyzer>
+			<tokenizer class="solr.StandardTokenizerFactory"/>
+
+			<filter class="solr.StopFilterFactory" words="stopwords.txt" format="snowball"/>
+			<filter class="solr.LowerCaseFilterFactory" />              
+			<filter class="solr.GermanNormalizationFilterFactory"/>
+			<filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+			<filter class="solr.DictionaryCompoundWordTokenFilterFactory" dictionary="common-nouns.txt" minWordSize="5" minSubwordSize="4" maxSubwordSize="15" onlyLongestMatch="true"/>
+			
+			<filter class="solr.EdgeNGramFilterFactory" minGramSize="3" maxGramSize="20"/>	
+		</analyzer>
+	</fieldType>
+</schema>

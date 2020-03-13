@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<rdf:RDF xmlns:bibo="http://purl.org/ontology/bibo/"
+         xmlns:cito="http://purl.org/spar/cito/"
+         xmlns:datacite="http://datacite.org/schema/kernel-4"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:fabio="http://purl.org/spar/fabio/"
+         xmlns:fedora="http://fedora.info/definitions/v4/repository#"
+         xmlns:frapo="http://purl.org/cerif/frapo/"
+         xmlns:ldp="http://www.w3.org/ns/ldp#"
+         xmlns:pav="http://purl.org/pav#"
+         xmlns:premis="http://www.loc.gov/premis/rdf/v1#"
+         xmlns:rdau="http://www.rdaregistry.info/Elements/u/#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:sio="http://semanticscience.org/resource/"
+         xml:base="http://t-fdm-fedora.ub.uni-muenchen.de:8080/fcrepo/rest/24f66ef4-b2be-4356-8c8a-f9ea75d30d73">
+
+	<rdf:Description rdf:about="http://t-fdm-fedora.ub.uni-muenchen.de:8080/fcrepo/rest/24f66ef4-b2be-4356-8c8a-f9ea75d30d73/A/12/31/7/v4">
+		<fedora:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-08-30T13:27:31.524Z</fedora:created>
+		<rdf:type rdf:resource="http://www.w3.org/ns/ldp#Container"/>
+		<fedora:createdBy>fedoraAdmin</fedora:createdBy>
+		<rdf:type rdf:resource="http://www.w3.org/ns/ldp#BasicContainer"/>
+		<rdf:type rdf:resource="http://fedora.info/definitions/v4/repository#Container"/>
+		<fedora:lastModified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-09-04T12:59:27.766Z</fedora:lastModified>
+		<ldp:contains rdf:resource="http://t-fdm-fedora.ub.uni-muenchen.de:8080/fcrepo/rest/24f66ef4-b2be-4356-8c8a-f9ea75d30d73/A/12/31/7/v4/A12317_v4.csv"/>
+		<rdf:type rdf:resource="http://fedora.info/definitions/v4/repository#Resource"/>
+		<rdf:type rdf:resource="http://www.w3.org/ns/ldp#RDFSource"/>
+		<ldp:contains rdf:resource="http://t-fdm-fedora.ub.uni-muenchen.de:8080/fcrepo/rest/24f66ef4-b2be-4356-8c8a-f9ea75d30d73/A/12/31/7/v4/A12317_v4.xml"/>
+		<fedora:lastModifiedBy>fedoraAdmin</fedora:lastModifiedBy>
+
+
+		<bibo:doi>10.5282/verba-alpina_A12317_v4</bibo:doi>
+		<dcterms:creator rdf:resource="http://d-nb.info/gnd/123778689"/>
+		<dcterms:creator rdf:resource="http://d-nb.info/gnd/1167274636"/>
+		<dcterms:title xml:lang="en">VerbaAlpina instances related to the community "Fara San Martino"</dcterms:title>
+		<dc:publisher xml:lang="de">Universitätsbibliothek, Ludwig-Maximilians-Universität München</dc:publisher>
+		<dcterms:issued rdf:datatype="xs:gYear">2019</dcterms:issued>
+		<dcterms:subject rdf:resource="http://dewey.info/class/410/about"/>
+		<dcterms:subject rdf:resource="http://dewey.info/class/004/about"/>
+		<dc:subject>Fara San Martino</dc:subject>
+		<dcterms:subject rdf:resource="http://dewey.info/class/450/about"/>
+		<dcterms:subject rdf:resource="https://glottolog.org/resource/languoid/id/shif1234"/>
+		<dcterms:contributor rdf:resource="http://d-nb.info/gnd/123778689"/>
+		<dcterms:contributor rdf:resource="http://d-nb.info/gnd/1167274636"/>
+		<dcterms:contributor rdf:resource="http://d-nb.info/gnd/1170932088"/>
+		<dcterms:contributor rdf:resource="http://d-nb.info/gnd/1170932126"/>
+		<dcterms:contributor rdf:resource="http://d-nb.info/gnd/1170932207"/>
+		<dcterms:contributor rdf:resource="http://d-nb.info/gnd/1170932290"/>
+		<dcterms:contributor rdf:resource="http://d-nb.info/gnd/1170932363"/>
+		<dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2019-09-03</dcterms:dateSubmitted>
+		<dcterms:created>2018-07-01/2018-12-31</dcterms:created>
+		<dcterms:language rdf:resource="http://id.loc.gov/vocabulary/iso639-1/de"/>
+		<rdf:type rdf:resource="http://purl.org/dc/dcmitype/Dataset"/>
+		<premis:hasOriginalName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A12317_v4</premis:hasOriginalName>
+		<sio:SIO_001242 rdf:resource="https://www.verba-alpina.gwi.uni-muenchen.de/?api=1&amp;action=getRecord&amp;id=A12317&amp;version=182&amp;format=csv&amp;empty=0"/>
+		<dcterms:hasPart rdf:resource="http://t-fdm-fedora.ub.uni-muenchen.de:8080/fcrepo/rest/24f66ef4-b2be-4356-8c8a-f9ea75d30d73/S/60/30/v4"/>
+		<dcterms:format rdf:resource="https://w3id.org/spar/mediatype/text/csv"/>
+		<pav:version>18/2</pav:version>
+		<dcterms:rights rdf:resource="http://creativecommons.org/licenses/by-sa/4.0/"/>
+		<dcterms:abstract xml:lang="en">Contains 1 VerbaAlpina dataset, which is related to the community "Fara San Martino".</dcterms:abstract>
+		<dc:coverage>Fara San Martino</dc:coverage>
+		<frapo:hasFundingAgency rdf:resource="http://isni.org/isni/0000000120969829"/>
+		<frapo:isFundedBy rdf:resource="http://gepris.dfg.de/gepris/projekt/253900505"/>
+
+
+	</rdf:Description>
+</rdf:RDF>

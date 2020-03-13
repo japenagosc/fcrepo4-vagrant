@@ -1,0 +1,1 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>INSERT {<> dcterms:isPartOf <http://localhost:8080/fcrepo/rest/d1/67/e9/2c/d167e92c-b2d7-4cca-9b24-b89f8a68c71a/A/14/16/5/v5> . } WHERE {}
