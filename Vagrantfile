@@ -15,6 +15,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.network :forwarded_port, guest: 9080, host: 9080 # Fixity and Reindexing
 	config.vm.network :forwarded_port, guest: 61616, host: 61616 #
 	config.vm.network :forwarded_port, guest: 8983, host: 8983 #Solr
+	
+	#config.vm.network :forwarded_port, guest: 8888, host: 8888 #Solr
+	#config.vm.network :forwarded_port, guest: 7777, host: 7777 #Solr
 
   config.vm.provider "virtualbox" do |v|
   	v.memory = 4096
@@ -27,6 +30,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "backup_restore", type: "shell", path: "./install_scripts/backup_restore.sh", args: shared_dir
   #config.vm.provision "fedora_camel_toolbox", type: "shell", path: "./install_scripts/fedora_camel_toolbox.sh", args: shared_dir
  # config.vm.provision "hawtio", type: "shell", path: "./install_scripts/hawtio.sh", args: shared_dir
+  
+  config.vm.provision "file", source: "./install_scripts/template/schema.xml", destination: "/home/vagrant/template/schema.xml"
+  config.vm.provision "file", source: "./install_scripts/template/solrconfig.xml", destination: "/home/vagrant/template/solrconfig.xml"
+  config.vm.provision "file", source: "./install_scripts/template/common-nouns.txt", destination: "/home/vagrant/template/common-nouns.txt"
+  config.vm.provision "file", source: "./install_scripts/template/stopwords.txt", destination: "/home/vagrant/template/stopwords.txt"
+  
+  config.vm.provision "file", source: "./install_scripts/template/TestFiles.xml", destination: "/home/vagrant/template/TestFiles.xml"
+  
   config.vm.provision "solr", type: "shell", path: "./install_scripts/solr8.sh", args: shared_dir
 
 end
